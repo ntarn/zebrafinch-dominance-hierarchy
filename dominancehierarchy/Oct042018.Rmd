@@ -2,7 +2,7 @@
 title: "Data Analysis"
 author: "Natalie Tarn"
 date: "2/12/2019"
-output: html_document
+output: github_document
 ---
 
 
@@ -35,7 +35,7 @@ d<-read.csv("Dominance_Hierarchy_Data_Test_Oct042018.csv")
 
 This plot shows how the number of interactions progresses along the timing of filming. Note that the number of interactions decreases each day of filming, i.e. the hierarchy likely stabilized.
 
-```{r, message=FALSE,echo=FALSE}
+```{r interaction-plot, message=FALSE,echo=FALSE}
 plot(d$Date.int[d$Obs.Day==1]~d$time_sec[d$Obs.Day==1],type='b',xlim=c(0,1800),pch=19,
      xlab="time (s)",ylab="number of interaction")+
   points(d$Date.int[d$Obs.Day==2]~d$time_sec[d$Obs.Day==2],type='b',col='dark red',pch=19)+
@@ -47,7 +47,7 @@ legend("topleft",c('Day 1','Day 2','Day 3'),pch=c(19,19,19),col=c('black','dark 
 
 This plot shows a network of who is being aggressive toward whom. Larger circles represent indivdiuals that were involved in a greater number of interactions. Larger arrows represent a greater number of interactions. The legend shows which number corresponds to which individual
 
-```{r, echo=FALSE,warning=FALSE,message=FALSE}
+```{r dominance-network, echo=FALSE,warning=FALSE,message=FALSE}
 library('sand')
 library('igraph')
 library('sna')
@@ -66,7 +66,7 @@ legend('topleft',c("1=BLK","2=DKBLU","3=DKGRN","4=LTBLU","5=LTGRN","6=YELLOW"))
 
 This table shows the Elo rating for each individual - a measure of how dominant each individual is based on how often it was aggressive and how often it received aggression. 
 
-```{r, echo=FALSE,message=FALSE}
+```{r hierarchy, echo=FALSE,message=FALSE}
 require(aniDom)
 winners<-as.integer(d$Aggressor)
 losers<-as.integer(d$Receiver)
